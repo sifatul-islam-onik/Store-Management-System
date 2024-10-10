@@ -7,9 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -144,12 +148,20 @@ public class Controller implements Initializable {
             preparedStatement.setString(2, login_password.getText());
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                //will implement later
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Login Successful");
                 alert.showAndWait();
+                Data.username = login_username.getText();
+
+                Parent root = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Main Menu");
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                login_button.getScene().getWindow().hide();
             }
             else{
                 login_password.clear();
