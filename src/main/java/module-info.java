@@ -9,6 +9,7 @@ module com.example.storemanagementsystem {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.example.storemanagementsystem to javafx.fxml;
     exports com.example.storemanagementsystem;
