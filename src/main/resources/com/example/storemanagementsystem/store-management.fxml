@@ -15,6 +15,22 @@
   <children>
     <AnchorPane fx:id="login_form" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
       <children>
+        <AnchorPane fx:id="login_form" layoutX="300.0" prefHeight="400.0" prefWidth="300.0">
+          <children>
+            <Label layoutX="40.0" layoutY="46.0" styleClass="head-label" stylesheets="@login.css" text="Login Account" textFill="#39c1a6">
+              <font>
+                <Font size="20.0" />
+              </font>
+            </Label>
+            <TextField fx:id="login_username" layoutX="40.0" layoutY="95.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" />
+            <PasswordField fx:id="login_password" layoutX="40.0" layoutY="135.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" />
+            <Hyperlink fx:id="forgot_password" layoutX="40.0" layoutY="174.0" onAction="#switchForm" text="Forgot password?">
+              <font>
+                <Font size="10.0" />
+              </font>
+            </Hyperlink>
+            <Button fx:id="login_button" layoutX="40.0" layoutY="200.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="220.0" styleClass="login-button" stylesheets="@login.css" text="Login" />
+          </children></AnchorPane>
         <AnchorPane fx:id="signup_form" prefHeight="400.0" prefWidth="300.0">
           <children>
             <Label layoutX="40.0" layoutY="46.0" styleClass="head-label" stylesheets="@login.css" text="Register Account" textFill="#39c1a6">
@@ -30,22 +46,41 @@
             <TextField fx:id="register_answer" layoutX="40.0" layoutY="269.0" prefHeight="30.0" prefWidth="220.0" promptText="Answer" />
           </children>
         </AnchorPane>
-        <AnchorPane layoutX="300.0" layoutY="5.0" prefHeight="400.0" prefWidth="300.0">
-          <children>
-            <Label layoutX="40.0" layoutY="42.0" styleClass="head-label" stylesheets="@login.css" text="Login Account" textFill="#39c1a6">
-              <font>
-                <Font size="20.0" />
-              </font>
-            </Label>
-            <TextField fx:id="login_username" layoutX="40.0" layoutY="95.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" />
-            <PasswordField fx:id="login_password" layoutX="40.0" layoutY="135.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" />
-            <Hyperlink fx:id="forgot_password" layoutX="40.0" layoutY="174.0" text="Forgot password?">
-              <font>
-                <Font size="10.0" />
-              </font>
-            </Hyperlink>
-            <Button fx:id="login_button" layoutX="40.0" layoutY="200.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="220.0" styleClass="login-button" stylesheets="@login.css" text="Login" />
-          </children></AnchorPane>
+            <AnchorPane fx:id="forgot_form1" layoutX="300.0" prefHeight="400.0" prefWidth="300.0" visible="false">
+               <children>
+                  <Label layoutX="40.0" layoutY="46.0" styleClass="head-label" stylesheets="@login.css" text="Forgot Password" textFill="#39c1a6">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="forgot_username" layoutX="40.0" layoutY="101.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" />
+                  <Button fx:id="forgot_verify_button" layoutX="40.0" layoutY="239.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="220.0" styleClass="login-button" stylesheets="@login.css" text="Verify" />
+                  <ComboBox fx:id="forgot_question" layoutX="40.0" layoutY="149.0" prefHeight="30.0" prefWidth="220.0" promptText="Security Question" />
+                  <TextField fx:id="forgot_answer" layoutX="40.0" layoutY="191.0" prefHeight="30.0" prefWidth="220.0" promptText="Answer" />
+                  <Button fx:id="forgot_back_button" layoutX="100.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="100.0" styleClass="login-button" stylesheets="@login.css" text="Back">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="cil-arrow-circle-left" iconSize="15" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="forgot_form2" layoutX="300.0" prefHeight="400.0" prefWidth="300.0" visible="false">
+               <children>
+                  <Label layoutX="40.0" layoutY="46.0" styleClass="head-label" stylesheets="@login.css" text="Forgot Password" textFill="#39c1a6">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="forgot_change_button" layoutX="40.0" layoutY="225.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="220.0" styleClass="login-button" stylesheets="@login.css" text="Change Password" />
+                  <Button fx:id="forgot_change_back" layoutX="100.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="100.0" styleClass="login-button" stylesheets="@login.css" text="Back">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="cil-arrow-circle-left" iconSize="15" />
+                     </graphic>
+                  </Button>
+                  <PasswordField fx:id="forgot_new_password" layoutX="40.0" layoutY="115.0" prefHeight="30.0" prefWidth="220.0" promptText="New Password" />
+                  <PasswordField fx:id="forgot_new_password2" layoutX="40.0" layoutY="156.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm New Password" />
+               </children>
+            </AnchorPane>
         <AnchorPane fx:id="sideform" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" styleClass="gradient" stylesheets="@login.css">
           <children>
             <Label fx:id="side_dontHave_label" layoutX="78.0" layoutY="299.0" text="Don't have an account?" textFill="WHITE">

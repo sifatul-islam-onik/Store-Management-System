@@ -21,7 +21,40 @@ import java.util.*;
 public class Controller implements Initializable {
 
     @FXML
+    private TextField forgot_answer;
+
+    @FXML
+    private Button forgot_back_button;
+
+    @FXML
+    private Button forgot_change_back;
+
+    @FXML
+    private Button forgot_change_button;
+
+    @FXML
+    private AnchorPane forgot_form1;
+
+    @FXML
+    private AnchorPane forgot_form2;
+
+    @FXML
+    private PasswordField forgot_new_password;
+
+    @FXML
+    private PasswordField forgot_new_password2;
+
+    @FXML
     private Hyperlink forgot_password;
+
+    @FXML
+    private ComboBox<?> forgot_question;
+
+    @FXML
+    private TextField forgot_username;
+
+    @FXML
+    private Button forgot_verify_button;
 
     @FXML
     private Button login_button;
@@ -82,6 +115,13 @@ public class Controller implements Initializable {
         questionsList.addAll(Arrays.asList(questions));
         ObservableList list = FXCollections.observableArrayList(questionsList);
         register_question.setItems(list);
+    }
+
+    public void setForgotQuestions(){
+        List<String> questionsList = new ArrayList<>();
+        questionsList.addAll(Arrays.asList(questions));
+        ObservableList list = FXCollections.observableArrayList(questionsList);
+        forgot_question.setItems(list);
     }
 
     private Alert alert;
@@ -162,7 +202,7 @@ public class Controller implements Initializable {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Password too short");
+                alert.setContentText("Password too short...Choose a password of length atleast 8");
                 alert.showAndWait();
                 return;
             }
@@ -224,6 +264,106 @@ public class Controller implements Initializable {
             slide.setDuration(Duration.seconds(0.5));
             slide.play();
         }
+        else if(event.getSource() == forgot_password){
+            login_form.setVisible(false);
+            forgot_form1.setVisible(true);
+            setForgotQuestions();
+        }
+        else if(event.getSource() == forgot_back_button){
+            login_form.setVisible(true);
+            forgot_form1.setVisible(false);
+        }
+        else if(event.getSource() == forgot_verify_button){
+            if(forgot_username.getText().isEmpty() || forgot_question.getSelectionModel().getSelectedItem() == null || forgot_answer.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Required Fields are empty");
+                alert.showAndWait();
+                return;
+            }
+
+            connection = Database.getConnection();
+            String cmd = "SELECT username, question, answer FROM employees WHERE username = ? AND question = ? AND answer = ?";
+
+            try{
+                preparedStatement = connection.prepareStatement(cmd);
+                preparedStatement.setString(1, forgot_username.getText());
+                preparedStatement.setString(2,(String)forgot_question.getSelectionModel().getSelectedItem());
+                preparedStatement.setString(3,forgot_answer.getText());
+                resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    forgot_form1.setVisible(false);
+                    forgot_form2.setVisible(true);
+                }
+                else{
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Credentials does not match");
+                    alert.showAndWait();
+                    return;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(event.getSource() == forgot_change_button){
+            if(forgot_new_password.getText().isEmpty() || forgot_new_password2.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Required Fields are empty");
+                alert.showAndWait();
+                return;
+            }
+            if(forgot_new_password.getText().length() < 8) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Password too short...Choose a password of length atleast 8");
+                alert.showAndWait();
+                return;
+            }
+            if(!forgot_new_password.getText().equals(forgot_new_password2.getText())){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Passwords do not match");
+                alert.showAndWait();
+                forgot_new_password.clear();
+                forgot_new_password2.clear();
+                return;
+            }
+            connection = Database.getConnection();
+            String cmd = "Update employees SET password = '" + forgot_new_password.getText() + "' WHERE username = '" + forgot_username.getText() + "'";
+            try{
+                preparedStatement = connection.prepareStatement(cmd);
+                preparedStatement.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Password changed successfully");
+                alert.showAndWait();
+
+                forgot_username.setText("");
+                forgot_new_password.setText("");
+                forgot_new_password2.setText("");
+                forgot_answer.setText("");
+                forgot_question.getSelectionModel().clearSelection();
+
+                forgot_form2.setVisible(false);
+                login_form.setVisible(true);
+
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(event.getSource() == forgot_change_back){
+            forgot_form1.setVisible(true);
+            forgot_form2.setVisible(false);
+        }
+
     }
 
     @Override
