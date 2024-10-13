@@ -66,68 +66,68 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dashboard_panel" layoutX="198.0" layoutY="185.0" prefHeight="600.0" prefWidth="857.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dashboard_panel" layoutX="198.0" layoutY="185.0" prefHeight="600.0" prefWidth="857.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="835.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.leftAnchor="14.399999999999977" AnchorPane.rightAnchor="8.399999999999977">
                                  <children>
                                     <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="201.6" prefWidth="835.2" AnchorPane.bottomAnchor="2.2000000000000455" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="2.199999999999818" AnchorPane.topAnchor="1.0">
                                        <content>
-                                          <AnchorPane prefHeight="182.0" prefWidth="866.0">
+                                          <AnchorPane prefHeight="178.0" prefWidth="866.0">
                                              <children>
-                                                <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="166.0" prefWidth="250.0" styleClass="nav-menu" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                                <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="166.0" prefWidth="195.0" styleClass="nav-menu" stylesheets="@main-menu.css">
                                                    <children>
                                                       <FontIcon iconLiteral="cil-people" iconSize="70" layoutX="14.0" layoutY="111.0" />
-                                                      <Label layoutX="61.0" layoutY="124.0" text="Number of Customers">
+                                                      <Label layoutX="14.0" layoutY="124.0" text="Customers">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="109.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
+                                                      <Label fx:id="dashboard_numberofCustomer" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="56.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane layoutX="272.0" layoutY="8.0" prefHeight="166.0" prefWidth="250.0" styleClass="nav-menu" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                                <AnchorPane layoutX="209.0" layoutY="9.0" prefHeight="166.0" prefWidth="195.0" styleClass="nav-menu" stylesheets="@main-menu.css">
                                                    <children>
                                                       <FontIcon iconLiteral="cil-money" iconSize="70" layoutX="14.0" layoutY="111.0" />
-                                                      <Label layoutX="110.0" layoutY="124.0" text="Today's Income">
+                                                      <Label layoutX="14.0" layoutY="124.0" text="Today's Income">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="109.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
+                                                      <Label fx:id="dashboard_todaysIncome" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="54.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane layoutX="530.0" layoutY="7.0" prefHeight="166.0" prefWidth="250.0" styleClass="nav-menu" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="7.0">
+                                                <AnchorPane layoutX="411.0" layoutY="9.0" prefHeight="166.0" prefWidth="195.0" styleClass="nav-menu" stylesheets="@main-menu.css">
                                                    <children>
                                                       <FontIcon iconLiteral="cil-money" iconSize="70" layoutX="14.0" layoutY="111.0" />
-                                                      <Label layoutX="132.0" layoutY="124.0" text="Total Income">
+                                                      <Label layoutX="14.0" layoutY="124.0" text="Total Income">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="109.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
+                                                      <Label fx:id="dashboard_totalIncome" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="55.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane layoutX="788.0" layoutY="9.0" prefHeight="166.0" prefWidth="250.0" styleClass="nav-menu" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="10.200000000000017" AnchorPane.topAnchor="9.0">
+                                                <AnchorPane layoutX="613.0" layoutY="9.0" prefHeight="166.0" prefWidth="195.0" styleClass="nav-menu" stylesheets="@main-menu.css">
                                                    <children>
                                                       <FontIcon iconLiteral="cil-cart" iconSize="70" layoutX="14.0" layoutY="111.0" />
-                                                      <Label layoutX="33.0" layoutY="122.0" text="Number of Sold Products">
+                                                      <Label layoutX="14.0" layoutY="121.0" text="Sold Products">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="109.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
+                                                      <Label fx:id="dashboard_soldProduct" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="49.0" layoutY="14.0" prefHeight="27.0" prefWidth="126.0" text="0">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
@@ -142,9 +142,9 @@
                               </AnchorPane>
                               <AnchorPane layoutX="14.0" layoutY="228.0" prefHeight="365.0" prefWidth="835.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="6.399999999999977" AnchorPane.leftAnchor="14.399999999999977" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="228.0">
                                  <children>
-                                    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="340.0" prefWidth="458.0" styleClass="round-bg" stylesheets="@main-menu.css">
+                                    <AnchorPane layoutX="11.0" layoutY="12.0" prefHeight="340.0" prefWidth="403.0" styleClass="round-bg" stylesheets="@main-menu.css">
                                        <children>
-                                          <AreaChart layoutX="1.6" layoutY="1.6" prefHeight="340.0" prefWidth="458.4" title="INCOME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AreaChart fx:id="dashboard_incomeChart" layoutX="5.6" layoutY="4.8" prefHeight="331.0" prefWidth="403.0" title="INCOME" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="4.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -154,9 +154,9 @@
                                           </AreaChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="484.0" layoutY="14.0" prefHeight="340.0" prefWidth="341.0" styleClass="round-bg" stylesheets="@main-menu.css">
+                                    <AnchorPane layoutX="418.0" layoutY="13.0" prefHeight="340.0" prefWidth="407.0" styleClass="round-bg" stylesheets="@main-menu.css">
                                        <children>
-                                          <BarChart layoutX="-51.0" prefHeight="401.6" prefWidth="451.2" title="CUSTOMER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <BarChart fx:id="dashboard_customerChart" layoutX="0.8" layoutY="1.6" prefHeight="334.0" prefWidth="406.0" title="CUSTOMER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="1.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -174,7 +174,7 @@
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="276.0" prefWidth="834.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="313.6" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                  <children>
-                                    <TableView fx:id="inventory_table" layoutX="15.0" layoutY="9.0" onMouseClicked="#selectData" prefHeight="258.0" prefWidth="806.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                    <TableView fx:id="inventory_table" layoutX="15.0" layoutY="9.0" onMouseClicked="#selectDataInventory" prefHeight="258.0" prefWidth="806.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                       <columns>
                                         <TableColumn fx:id="inventory_col_productid" prefWidth="75.0" text="Product ID" />
                                         <TableColumn fx:id="inventory_col_productname" prefWidth="116.80000305175781" text="Product Name" />
@@ -321,14 +321,13 @@
                                        </font>
                                     </Label>
                                     <Button fx:id="menu_pay_btn" layoutX="31.0" layoutY="481.0" mnemonicParsing="false" onAction="#menuPayment" prefHeight="30.0" prefWidth="230.0" text="Pay" />
-                                    <Button fx:id="menu_remove_btn" layoutX="75.0" layoutY="530.0" mnemonicParsing="false" onAction="#menuRemove" prefHeight="30.0" prefWidth="70.0" text="Remove" />
-                                    <Button fx:id="menu_receipt_btn" layoutX="153.0" layoutY="530.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Receipt" />
-                                    <Button fx:id="menu_refresh_btn" layoutX="113.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRefresh" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
+                                    <Button fx:id="menu_remove_btn" layoutX="153.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRemove" prefHeight="30.0" prefWidth="70.0" text="Remove" />
+                                    <Button fx:id="menu_refresh_btn" layoutX="75.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRefresh" prefHeight="30.0" prefWidth="70.0" text="Refresh" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="customer_panel" layoutX="346.0" layoutY="200.0" prefHeight="600.0" prefWidth="857.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="customer_panel" layoutX="346.0" layoutY="200.0" prefHeight="600.0" prefWidth="857.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="577.0" prefWidth="830.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="11.399999999999977" AnchorPane.leftAnchor="12.800000000000068" AnchorPane.rightAnchor="14.200000000000045" AnchorPane.topAnchor="11.199999999999932">
                                  <children>

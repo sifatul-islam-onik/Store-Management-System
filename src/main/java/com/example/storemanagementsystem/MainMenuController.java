@@ -9,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -155,9 +158,6 @@ public class MainMenuController implements Initializable {
     private Button menu_pay_btn;
 
     @FXML
-    private Button menu_receipt_btn;
-
-    @FXML
     private Button menu_remove_btn;
 
     @FXML
@@ -175,6 +175,24 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button menu_refresh_btn;
 
+    @FXML
+    private BarChart<?, ?> dashboard_customerChart;
+
+    @FXML
+    private AreaChart<?, ?> dashboard_incomeChart;
+
+    @FXML
+    private Label dashboard_numberofCustomer;
+
+    @FXML
+    private Label dashboard_soldProduct;
+
+    @FXML
+    private Label dashboard_todaysIncome;
+
+    @FXML
+    private Label dashboard_totalIncome;
+
     private String cmd;
     private Alert alert;
     private Connection connection = Database.getConnection();
@@ -188,6 +206,7 @@ public class MainMenuController implements Initializable {
         displayOrderData();
         displayTotalPrice();
         displayCustomerData();
+        displayDashBoard();
     }
 
     public void switchForm(ActionEvent event) {
@@ -196,6 +215,7 @@ public class MainMenuController implements Initializable {
             inventory_panel.setVisible(false);
             customer_panel.setVisible(false);
             menu_panel.setVisible(false);
+            displayDashBoard();
         }
         else if(event.getSource() == inventory_btn) {
             dashboard_panel.setVisible(false);
@@ -217,6 +237,109 @@ public class MainMenuController implements Initializable {
             customer_panel.setVisible(true);
             menu_panel.setVisible(false);
         }
+    }
+
+    public void displayDashboardNoOfCustomer(){
+        cmd = "SELECT COUNT(id) FROM receipts";
+        int count = 0;
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                count = resultSet.getInt("COUNT(id)");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        dashboard_numberofCustomer.setText(String.valueOf(count));
+    }
+
+    public void displayDashboardSoldProduct(){
+        cmd = "SELECT SUM(quantity) FROM customers";
+        int count = 0;
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                count = resultSet.getInt("SUM(quantity)");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        dashboard_soldProduct.setText(String.valueOf(count));
+    }
+
+    public void displayDashboardTotalIncome(){
+        Date date = new Date();
+        double total = 0;
+        cmd = "SELECT SUM(total) FROM receipts";
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                total = resultSet.getDouble("SUM(total)");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        dashboard_totalIncome.setText(total + " BDT");
+    }
+
+    public void displayDashboardTodaysIncome(){
+        Date date = new Date();
+        double total = 0;
+        cmd = "SELECT SUM(total) FROM receipts WHERE date = '" + new java.sql.Date(date.getTime()) + "'";
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                total = resultSet.getDouble("SUM(total)");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        dashboard_totalIncome.setText(total + " BDT");
+    }
+
+    public void displayDashboardIncomeChart(){
+        dashboard_incomeChart.getData().clear();
+        cmd = "SELECT date, SUM(total) FROM receipts GROUP BY date order by TIMESTAMP(date)";
+        XYChart.Series chart = new XYChart.Series();
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                chart.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getDouble(2)));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        dashboard_incomeChart.getData().add(chart);
+    }
+
+    public void displayDashboardCustomerChart(){
+        dashboard_customerChart.getData().clear();
+        cmd = "SELECT date, COUNT(id) FROM receipts GROUP BY date order by TIMESTAMP(date)";
+        XYChart.Series chart = new XYChart.Series();
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                chart.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getInt(2)));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        dashboard_customerChart.getData().add(chart);
+    }
+
+    public void displayDashBoard(){
+        displayDashboardNoOfCustomer();
+        displayDashboardSoldProduct();
+        displayDashboardTotalIncome();
+        displayDashboardTodaysIncome();
+        displayDashboardIncomeChart();
+        displayDashboardCustomerChart();
     }
 
     public ObservableList<CustomerData> getCustomerData(){
@@ -366,6 +489,39 @@ public class MainMenuController implements Initializable {
         ProductData product =  menu_table.getSelectionModel().getSelectedItem();
         int ind = menu_table.getSelectionModel().getSelectedIndex();
         if(ind < 0 || product.getId() == 0) return;
+
+        cmd = "SELECT product_id, type, stock, price, image FROM products WHERE name = '" + product.getProductName() + "'";
+        ProductData fetchedProduct = new ProductData();
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                fetchedProduct.setProduct_id(resultSet.getInt("product_id"));
+                fetchedProduct.setType(resultSet.getString("type"));
+                fetchedProduct.setStock(resultSet.getInt("stock"));
+                fetchedProduct.setPrice(resultSet.getDouble("price"));
+                fetchedProduct.setImage(resultSet.getString("image"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int updStock = product.getQuantity() + fetchedProduct.getStock();
+        String path = fetchedProduct.getImage();
+        path = path.replace("\\","\\\\");
+
+        cmd = "UPDATE products SET name = '" +
+                product.getProductName() + "', type = '" + fetchedProduct.getType() +
+                "', stock = '" + updStock + "', price = '" + fetchedProduct.getPrice() + "', status = '" +
+                "In Stock" + "', image = '" + path + "', date = '" + product.getDate() +
+                "' WHERE product_id = '" + fetchedProduct.getProduct_id() + "'";
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         cmd = "DELETE FROM customers WHERE id = " + product.getId();
         try{
             preparedStatement = connection.prepareStatement(cmd);
@@ -518,7 +674,7 @@ public class MainMenuController implements Initializable {
         inventory_image.setImage(null);
     }
 
-    public void selectData(){
+    public void selectDataInventory(){
         ProductData productData = (ProductData) inventory_table.getSelectionModel().getSelectedItem();
         int index = inventory_table.getSelectionModel().getSelectedIndex();
         if(index<0) return;

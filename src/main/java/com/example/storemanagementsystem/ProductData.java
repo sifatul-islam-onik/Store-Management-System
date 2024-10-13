@@ -14,6 +14,7 @@ public class ProductData {
     private Date date;
     private int quantity;
 
+    public ProductData() {}
 
     public ProductData(int id, int product_id, String productName, String type, int stock, Double price, String status, String image, Date date) {
         this.id = id;

@@ -46,8 +46,6 @@ public class ProductCardController implements Initializable {
     private Alert alert;
 
     public void addBtn(){
-//        MainMenuController mainMenuController = new MainMenuController();
-//        mainMenuController.customerID();
         quantity = product_card_spinner.getValue();
         if(quantity == 0) return;
         String check = "";
@@ -93,13 +91,15 @@ public class ProductCardController implements Initializable {
                     preparedStatement.executeUpdate();
 
                     int updStock = stock - quantity;
+                    String path = productData.getImage();
+                    path = path.replace("\\","\\\\");
                     if(updStock == 0){
                         cmd = "UPDATE products SET name = '"
                                 + product_card_name.getText() + "', type = '"
                                 + productData.getType() + "', stock = " + updStock + ", price = " + productData.getPrice()
                                 + ", status = '"
                                 + "Out of Stock" + "', image = '"
-                                + productData.getImage() + "', date = '"
+                                + path + "', date = '"
                                 + productData.getDate() + "' WHERE product_id = '"
                                 + productData.getProduct_id() + "'";
                     }
@@ -109,17 +109,14 @@ public class ProductCardController implements Initializable {
                                 + productData.getType() + "', stock = " + updStock + ", price = " + productData.getPrice()
                                 + ", status = '"
                                 + "In Stock" + "', image = '"
-                                + productData.getImage() + "', date = '"
+                                + path + "', date = '"
                                 + productData.getDate() + "' WHERE product_id = '"
                                 + productData.getProduct_id() + "'";
                     }
 
                     preparedStatement = connection.prepareStatement(cmd);
                     preparedStatement.executeUpdate();
-
-//                    mainMenuController = new MainMenuController();
-//                    mainMenuController.displayOrderData();
-//                    mainMenuController.displayTotalPrice();
+                    setQuantity();
 
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("SUCCESS");
@@ -136,7 +133,6 @@ public class ProductCardController implements Initializable {
     public void setQuantity(){
         spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
         product_card_spinner.setValueFactory(spin);
-
     }
 
     public void setProductData(ProductData productData) {
@@ -145,7 +141,6 @@ public class ProductCardController implements Initializable {
         product_card_price.setText(productData.getPrice().toString());
         String path = "File:" + productData.getImage();
         product_card_image.setImage(new Image(path,225,148,false,true));
-
     }
 
     @Override
