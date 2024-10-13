@@ -46,6 +46,8 @@ public class ProductCardController implements Initializable {
     private Alert alert;
 
     public void addBtn(){
+//        MainMenuController mainMenuController = new MainMenuController();
+//        mainMenuController.customerID();
         quantity = product_card_spinner.getValue();
         if(quantity == 0) return;
         String check = "";
@@ -114,6 +116,10 @@ public class ProductCardController implements Initializable {
 
                     preparedStatement = connection.prepareStatement(cmd);
                     preparedStatement.executeUpdate();
+
+//                    mainMenuController = new MainMenuController();
+//                    mainMenuController.displayOrderData();
+//                    mainMenuController.displayTotalPrice();
 
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("SUCCESS");

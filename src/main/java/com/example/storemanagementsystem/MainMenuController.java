@@ -29,6 +29,24 @@ import java.util.*;
 public class MainMenuController implements Initializable {
 
     @FXML
+    private TableColumn<?, ?> customer_col_cashier;
+
+    @FXML
+    private TableColumn<?, ?> customer_col_date;
+
+    @FXML
+    private TableColumn<?, ?> customer_col_id;
+
+    @FXML
+    private TableColumn<?, ?> customer_col_total;
+
+    @FXML
+    private AnchorPane customer_panel;
+
+    @FXML
+    private TableView<CustomerData> customer_table;
+
+    @FXML
     private Button customers_btn;
 
     @FXML
@@ -146,7 +164,7 @@ public class MainMenuController implements Initializable {
     private ScrollPane menu_scroll;
 
     @FXML
-    private TableView<?> menu_table;
+    private TableView<ProductData> menu_table;
 
     @FXML
     private Label menu_total;
@@ -154,39 +172,213 @@ public class MainMenuController implements Initializable {
     @FXML
     private AnchorPane dashboard_panel;
 
+    @FXML
+    private Button menu_refresh_btn;
+
     private String cmd;
     private Alert alert;
-    private Image image;
-    private Connection connection;
+    private Connection connection = Database.getConnection();
     private PreparedStatement preparedStatement;
     private Statement statement;
     private ResultSet resultSet;
+
+    public void menuRefresh(){
+        displayInventory();
+        displayCardData();
+        displayOrderData();
+        displayTotalPrice();
+        displayCustomerData();
+    }
 
     public void switchForm(ActionEvent event) {
         if(event.getSource() == dashboard_btn) {
             dashboard_panel.setVisible(true);
             inventory_panel.setVisible(false);
-//            customers_panel.setVisible(false);
+            customer_panel.setVisible(false);
             menu_panel.setVisible(false);
         }
         else if(event.getSource() == inventory_btn) {
             dashboard_panel.setVisible(false);
             inventory_panel.setVisible(true);
-//            customers_panel.setVisible(false);
+            customer_panel.setVisible(false);
             menu_panel.setVisible(false);
+            displayInventory();
         }
         else if(event.getSource() == menu_btn) {
             dashboard_panel.setVisible(false);
             inventory_panel.setVisible(false);
-//            customers_panel.setVisible(false);
+            customer_panel.setVisible(false);
             menu_panel.setVisible(true);
+            menuRefresh();
+        }
+        else if(event.getSource() == customers_btn) {
+            dashboard_panel.setVisible(false);
+            inventory_panel.setVisible(false);
+            customer_panel.setVisible(true);
+            menu_panel.setVisible(false);
+        }
+    }
+
+    public ObservableList<CustomerData> getCustomerData(){
+        ObservableList<CustomerData> data = FXCollections.observableArrayList();
+        cmd = "SELECT * FROM receipts";
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            CustomerData customerData;
+            while(resultSet.next()){
+                customerData = new CustomerData(resultSet.getInt("id"),resultSet.getInt("customer_id"),resultSet.getDouble("total"),resultSet.getDate("date"),resultSet.getString("employee_username"));
+                data.add(customerData);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public void displayCustomerData(){
+        ObservableList<CustomerData> data = getCustomerData();
+
+        customer_col_id.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        customer_col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        customer_col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        customer_col_cashier.setCellValueFactory(new PropertyValueFactory<>("employee_username"));
+
+        customer_table.setItems(data);
+    }
+
+    public ObservableList<ProductData> getOrderData() {
+        customerID();
+        ObservableList<ProductData> data = FXCollections.observableArrayList();
+        cmd = "SELECT * FROM customers WHERE customer_id = " + Data.cid;
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                 ProductData productData = new ProductData(resultSet.getInt("ID"),
+                         resultSet.getString("product_name"),
+                         resultSet.getInt("quantity"),
+                         resultSet.getDouble("price"),
+                         resultSet.getDate("date"));
+                 data.add(productData);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public void displayOrderData(){
+        ObservableList<ProductData> data = getOrderData();
+        menu_col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        menu_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        menu_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        menu_table.setItems(data);
+    }
+
+    double getTotalPrice(){
+        double total = 0;
+        customerID();
+        cmd = "SELECT SUM(price) FROM customers WHERE customer_id = " + Data.cid;
+        try {
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                total = resultSet.getDouble("SUM(price)");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+    public void displayTotalPrice() {
+        double total = getTotalPrice();
+        menu_total.setText(total + " BDT");
+    }
+
+    public void menuAmmount(){
+        double total = getTotalPrice();
+        double ammount = Double.valueOf(menu_amount.getText().toString());
+        if(ammount<total){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Not sufficient ammount");
+            alert.showAndWait();
+            menu_change.setText("0.00 BDT");
+        }
+        else{
+            double change = ammount - total;
+            menu_change.setText(change + " BDT");
+        }
+    }
+
+    public void menuPayment(){
+        double total = getTotalPrice();
+        double ammount = Double.valueOf(menu_amount.getText().toString());
+        if(ammount<total){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Not sufficient ammount");
+            alert.showAndWait();
+            menu_change.setText("0.00 BDT");
+            return;
+        }
+        if(total == 0) return;
+
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("PAYMENT");
+        alert.setHeaderText(null);
+        alert.setContentText("Pay BDT " + total + " ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            cmd = "INSERT INTO receipts (customer_id, total, date, employee_username) VALUES(?,?,?,?)";
+            try{
+                preparedStatement = connection.prepareStatement(cmd);
+                preparedStatement.setInt(1, Data.cid);
+                preparedStatement.setDouble(2, total);
+                Date date = new Date();
+                preparedStatement.setDate(3,new java.sql.Date(date.getTime()));
+                preparedStatement.setString(4,Data.username);
+                preparedStatement.executeUpdate();
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("SUCCESS");
+                alert.setHeaderText(null);
+                alert.setContentText("Payment Successful");
+                alert.showAndWait();
+
+                menu_total.setText("0.00 BDT");
+                menu_change.setText("0.00 BDT");
+                menu_amount.clear();
+                menuRefresh();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public void menuRemove(){
+        ProductData product =  menu_table.getSelectionModel().getSelectedItem();
+        int ind = menu_table.getSelectionModel().getSelectedIndex();
+        if(ind < 0 || product.getId() == 0) return;
+        cmd = "DELETE FROM customers WHERE id = " + product.getId();
+        try{
+            preparedStatement = connection.prepareStatement(cmd);
+            preparedStatement.executeUpdate();
+            menuRefresh();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 
     public ObservableList<ProductData> getCardData(){
         ObservableList<ProductData> list = FXCollections.observableArrayList();
         cmd = "SELECT * FROM products";
-        connection = Database.getConnection();
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -236,8 +428,6 @@ public class MainMenuController implements Initializable {
         ObservableList<ProductData> inventoryList = FXCollections.observableArrayList();
         cmd = "SELECT * FROM products";
 
-        connection = Database.getConnection();
-
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -258,7 +448,7 @@ public class MainMenuController implements Initializable {
         File file = openFile.showOpenDialog(main_panel.getScene().getWindow());
         if(file != null){
             Data.path = file.getAbsolutePath();
-            image = new Image(file.toURI().toString(),175,175,false,true);
+            Image image = new Image(file.toURI().toString(),175,175,false,true);
             inventory_image.setImage(image);
         }
     }
@@ -273,7 +463,6 @@ public class MainMenuController implements Initializable {
             return;
         }
         cmd = "SELECT product_id FROM products WHERE product_id = '" + inventory_productid.getText() + "'";
-        connection = Database.getConnection();
         try{
             statement = connection.createStatement();
             resultSet = statement.executeQuery(cmd);
@@ -296,6 +485,7 @@ public class MainMenuController implements Initializable {
                 Date date = new Date();
                 preparedStatement.setDate(8, new java.sql.Date(date .getTime()));
                 String path = Data.path;
+                path.replace("\\","\\\\");
                 preparedStatement.setString(7, path);
                 preparedStatement.executeUpdate();
 
@@ -359,7 +549,6 @@ public class MainMenuController implements Initializable {
                 "', stock = '" + inventory_stock.getText() + "', price = '" + inventory_price.getText() + "', status = '" +
                 inventory_status.getSelectionModel().getSelectedItem() + "', image = '" + path + "', date = '" + Data.date +
                 "' WHERE product_id = '" + inventory_productid.getText() + "'";
-        connection = Database.getConnection();
         try{
             alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Update");
@@ -493,7 +682,6 @@ public class MainMenuController implements Initializable {
     public void customerID(){
         int cid = 0,cid2 = 0;
         cmd = "SELECT MAX(customer_id) FROM customers";
-        connection = Database.getConnection();
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -518,7 +706,6 @@ public class MainMenuController implements Initializable {
         displayUsername();
         setInventoryType();
         setStatus();
-        displayInventory();
-        displayCardData();
+        menuRefresh();
     }
 }

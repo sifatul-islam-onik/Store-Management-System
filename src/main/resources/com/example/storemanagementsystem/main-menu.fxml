@@ -66,7 +66,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dashboard_panel" layoutX="198.0" layoutY="185.0" prefHeight="600.0" prefWidth="857.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dashboard_panel" layoutX="198.0" layoutY="185.0" prefHeight="600.0" prefWidth="857.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="835.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.leftAnchor="14.399999999999977" AnchorPane.rightAnchor="8.399999999999977">
                                  <children>
@@ -279,7 +279,7 @@
                               </AnchorPane>
                               <AnchorPane layoutX="585.0" layoutY="12.0" prefHeight="575.0" prefWidth="292.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">
                                  <children>
-                                    <TableView fx:id="menu_table" layoutX="5.0" layoutY="9.0" prefHeight="320.0" prefWidth="279.0">
+                                    <TableView fx:id="menu_table" layoutX="5.0" layoutY="9.0" prefHeight="303.0" prefWidth="279.0">
                                       <columns>
                                         <TableColumn fx:id="menu_col_productName" prefWidth="90.3999605178833" text="Product Name" />
                                         <TableColumn fx:id="menu_col_quantity" prefWidth="59.2000732421875" text="Quantity" />
@@ -289,40 +289,65 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <Label layoutX="70.0" layoutY="354.0" text="Total :">
+                                    <Label layoutX="72.0" layoutY="370.0" text="Total :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="70.0" layoutY="380.0" text="Amount :">
+                                    <Label layoutX="72.0" layoutY="396.0" text="Amount :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="71.0" layoutY="412.0" text="Change :">
+                                    <Label layoutX="73.0" layoutY="428.0" text="Change :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="menu_amount" layoutX="141.0" layoutY="376.0" prefHeight="26.0" prefWidth="69.0" />
-                                    <Label fx:id="menu_total" layoutX="141.0" layoutY="354.0" prefHeight="20.0" prefWidth="91.0" text="0.00 BDT">
+                                    <TextField fx:id="menu_amount" layoutX="143.0" layoutY="392.0" onAction="#menuAmmount" prefHeight="26.0" prefWidth="69.0" />
+                                    <Label fx:id="menu_total" layoutX="143.0" layoutY="370.0" prefHeight="20.0" prefWidth="91.0" text="0.00 BDT">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="219.0" layoutY="379.0" text="BDT">
+                                    <Label layoutX="221.0" layoutY="395.0" text="BDT">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="menu_change" layoutX="141.0" layoutY="412.0" text="0.00 BDT">
+                                    <Label fx:id="menu_change" layoutX="143.0" layoutY="428.0" text="0.00 BDT">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="menu_pay_btn" layoutX="29.0" layoutY="465.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="230.0" text="Pay" />
-                                    <Button fx:id="menu_remove_btn" layoutX="73.0" layoutY="514.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Remove" />
-                                    <Button fx:id="menu_receipt_btn" layoutX="151.0" layoutY="514.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Receipt" />
+                                    <Button fx:id="menu_pay_btn" layoutX="31.0" layoutY="481.0" mnemonicParsing="false" onAction="#menuPayment" prefHeight="30.0" prefWidth="230.0" text="Pay" />
+                                    <Button fx:id="menu_remove_btn" layoutX="75.0" layoutY="530.0" mnemonicParsing="false" onAction="#menuRemove" prefHeight="30.0" prefWidth="70.0" text="Remove" />
+                                    <Button fx:id="menu_receipt_btn" layoutX="153.0" layoutY="530.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Receipt" />
+                                    <Button fx:id="menu_refresh_btn" layoutX="113.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRefresh" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="customer_panel" layoutX="346.0" layoutY="200.0" prefHeight="600.0" prefWidth="857.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="577.0" prefWidth="830.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="11.399999999999977" AnchorPane.leftAnchor="12.800000000000068" AnchorPane.rightAnchor="14.200000000000045" AnchorPane.topAnchor="11.199999999999932">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Customers">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="customer_table" layoutX="13.0" layoutY="52.0" prefHeight="511.0" prefWidth="804.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="13.60000000000008" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.799999999999955" AnchorPane.topAnchor="52.0">
+                                      <columns>
+                                        <TableColumn fx:id="customer_col_id" prefWidth="226.39999961853027" text="Customer ID" />
+                                        <TableColumn fx:id="customer_col_total" minWidth="0.0" prefWidth="172.0" text="Total (BDT)" />
+                                          <TableColumn fx:id="customer_col_date" prefWidth="169.60000610351562" text="Date" />
+                                          <TableColumn fx:id="customer_col_cashier" prefWidth="234.40008544921875" text="Cashier" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
                                  </children>
                               </AnchorPane>
                            </children>

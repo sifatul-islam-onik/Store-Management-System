@@ -6,4 +6,5 @@ public class Data {
     public static String date;
     public static int id;
     public static int cid;
+    public static int quantity;
 }

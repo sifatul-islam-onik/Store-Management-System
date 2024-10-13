@@ -12,6 +12,8 @@ public class ProductData {
     private String status;
     private String image;
     private Date date;
+    private int quantity;
+
 
     public ProductData(int id, int product_id, String productName, String type, int stock, Double price, String status, String image, Date date) {
         this.id = id;
@@ -22,6 +24,15 @@ public class ProductData {
         this.price = price;
         this.status = status;
         this.image = image;
+        this.date = date;
+//        this.quantity = quantity;
+    }
+
+    public ProductData(int id, String productName,int quantity, Double price, Date date) {
+        this.id = id;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
         this.date = date;
     }
 
@@ -95,5 +106,13 @@ public class ProductData {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

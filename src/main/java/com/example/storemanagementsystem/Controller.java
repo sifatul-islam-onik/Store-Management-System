@@ -111,6 +111,7 @@ public class Controller implements Initializable {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
+    private String cmd;
 
     private String[] questions = {"what is your pet name?","what is your favourite color?","what is your favourite food?"};
 
@@ -140,7 +141,7 @@ public class Controller implements Initializable {
             return;
         }
         connection = Database.getConnection();
-        String cmd = "SELECT username, password FROM employees WHERE username = ? AND password = ?";
+        cmd = "SELECT username, password FROM employees WHERE username = ? AND password = ?";
 
         try{
             preparedStatement = connection.prepareStatement(cmd);
@@ -188,7 +189,6 @@ public class Controller implements Initializable {
         }
 
         connection = Database.getConnection();
-        String cmd;
 
         try{
             cmd = "SELECT username FROM employees WHERE username = '"+register_username.getText()+"'";
@@ -296,7 +296,7 @@ public class Controller implements Initializable {
             }
 
             connection = Database.getConnection();
-            String cmd = "SELECT username, question, answer FROM employees WHERE username = ? AND question = ? AND answer = ?";
+            cmd = "SELECT username, question, answer FROM employees WHERE username = ? AND question = ? AND answer = ?";
 
             try{
                 preparedStatement = connection.prepareStatement(cmd);
@@ -348,7 +348,7 @@ public class Controller implements Initializable {
                 return;
             }
             connection = Database.getConnection();
-            String cmd = "Update employees SET password = '" + forgot_new_password.getText() + "' WHERE username = '" + forgot_username.getText() + "'";
+            cmd = "Update employees SET password = '" + forgot_new_password.getText() + "' WHERE username = '" + forgot_username.getText() + "'";
             try{
                 preparedStatement = connection.prepareStatement(cmd);
                 preparedStatement.executeUpdate();
