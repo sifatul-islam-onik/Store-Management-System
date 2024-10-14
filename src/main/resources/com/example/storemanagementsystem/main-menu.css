@@ -1,5 +1,5 @@
 .header{
-    -fx-background-color: linear-gradient(to bottom right, #bf7f2a, #e3a552);
+    -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f);
     -fx-border-color: #000;
     -fx-border-width: 1px;
 }
@@ -38,7 +38,41 @@
 
 .round-bg{
     -fx-background-color: white;
-    -fx-background-radius: 10px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+}
+
+.table-view{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: linear-gradient(to bottom right, #0fb565, #399a8f);
+    -fx-border-radius: 5px;
+    -fx-border-width: 1.5px;
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f);
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-background-insets: 0 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #000;
+}
+
+.btn{
+    -fx-background-color: linear-gradient(to bottom right, #098c53, #246861);
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+.btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f);
+}
+
+.card{
     -fx-border-color: #000;
-    -fx-border-width: .5px;
+    -fx-border-width: 1px;
 }

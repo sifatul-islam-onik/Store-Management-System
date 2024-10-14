@@ -142,9 +142,9 @@
                               </AnchorPane>
                               <AnchorPane layoutX="14.0" layoutY="228.0" prefHeight="365.0" prefWidth="835.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="6.399999999999977" AnchorPane.leftAnchor="14.399999999999977" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="228.0">
                                  <children>
-                                    <AnchorPane layoutX="11.0" layoutY="12.0" prefHeight="340.0" prefWidth="403.0" styleClass="round-bg" stylesheets="@main-menu.css">
+                                    <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="348.0" prefWidth="407.0" styleClass="round-bg" stylesheets="@main-menu.css">
                                        <children>
-                                          <AreaChart fx:id="dashboard_incomeChart" layoutX="5.6" layoutY="4.8" prefHeight="331.0" prefWidth="403.0" title="INCOME" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="4.0">
+                                          <AreaChart fx:id="dashboard_incomeChart" layoutX="6.0" layoutY="5.0" prefHeight="348.0" prefWidth="361.6000000000001" title="INCOME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -154,9 +154,9 @@
                                           </AreaChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="418.0" layoutY="13.0" prefHeight="340.0" prefWidth="407.0" styleClass="round-bg" stylesheets="@main-menu.css">
+                                    <AnchorPane layoutX="431.0" layoutY="9.0" prefHeight="348.0" prefWidth="394.0" styleClass="round-bg" stylesheets="@main-menu.css">
                                        <children>
-                                          <BarChart fx:id="dashboard_customerChart" layoutX="0.8" layoutY="1.6" prefHeight="334.0" prefWidth="406.0" title="CUSTOMER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="1.0">
+                                          <BarChart fx:id="dashboard_customerChart" layoutX="-1.6" layoutY="1.6" prefHeight="348.0" prefWidth="396.0" title="CUSTOMER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-8.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -227,27 +227,27 @@
                                           <ImageView fx:id="inventory_image" fitHeight="175.0" fitWidth="175.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="inventory_add_btn" layoutX="29.0" layoutY="180.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="30.0" prefWidth="75.0" text="ADD">
+                                    <Button fx:id="inventory_add_btn" layoutX="29.0" layoutY="180.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@main-menu.css" text="ADD">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="inventory_update_btn" layoutX="118.0" layoutY="180.0" mnemonicParsing="false" onAction="#updateBtn" prefHeight="30.0" prefWidth="75.0" text="UPDATE">
+                                    <Button fx:id="inventory_update_btn" layoutX="118.0" layoutY="180.0" mnemonicParsing="false" onAction="#updateBtn" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@main-menu.css" text="UPDATE">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="inventory_clear_btn" layoutX="205.0" layoutY="180.0" mnemonicParsing="false" onAction="#clearBtn" prefHeight="30.0" prefWidth="75.0" text="CLEAR">
+                                    <Button fx:id="inventory_clear_btn" layoutX="205.0" layoutY="180.0" mnemonicParsing="false" onAction="#clearBtn" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@main-menu.css" text="CLEAR">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="inventory_delete_btn" layoutX="294.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="30.0" prefWidth="75.0" text="DELETE">
+                                    <Button fx:id="inventory_delete_btn" layoutX="294.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@main-menu.css" text="DELETE">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="inventory_import_button" layoutX="639.0" layoutY="227.0" mnemonicParsing="false" onAction="#importBtn" prefHeight="30.0" prefWidth="75.0" text="IMPORT">
+                                    <Button fx:id="inventory_import_button" layoutX="639.0" layoutY="227.0" mnemonicParsing="false" onAction="#importBtn" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@main-menu.css" text="IMPORT">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -264,9 +264,9 @@
                         </AnchorPane>
                         <AnchorPane fx:id="menu_panel" layoutX="194.0" layoutY="82.0" prefHeight="600.0" prefWidth="857.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="530.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="12.0">
+                              <AnchorPane layoutX="15.2" layoutY="12.0" prefHeight="575.0" prefWidth="530.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="12.0">
                                  <children>
-                                    <ScrollPane fx:id="menu_scroll" layoutX="16.8" layoutY="16.8" prefHeight="548.0" prefWidth="504.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0">
+                                    <ScrollPane fx:id="menu_scroll" layoutX="8.0" layoutY="51.0" prefHeight="514.0" prefWidth="515.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="50.0">
                                        <content>
                                           <GridPane fx:id="menu_grid" prefHeight="26.0" prefWidth="118.0">
                                             <columnConstraints>
@@ -275,6 +275,12 @@
                                           </GridPane>
                                        </content>
                                     </ScrollPane>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Filter by Category :">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="menu_filter_type" layoutX="142.0" layoutY="12.0" onAction="#displayCardData" prefWidth="150.0" promptText="Type" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="585.0" layoutY="12.0" prefHeight="575.0" prefWidth="292.0" styleClass="round-bg" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">
@@ -320,9 +326,9 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="menu_pay_btn" layoutX="31.0" layoutY="481.0" mnemonicParsing="false" onAction="#menuPayment" prefHeight="30.0" prefWidth="230.0" text="Pay" />
-                                    <Button fx:id="menu_remove_btn" layoutX="153.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRemove" prefHeight="30.0" prefWidth="70.0" text="Remove" />
-                                    <Button fx:id="menu_refresh_btn" layoutX="75.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRefresh" prefHeight="30.0" prefWidth="70.0" text="Refresh" />
+                                    <Button fx:id="menu_pay_btn" layoutX="31.0" layoutY="481.0" mnemonicParsing="false" onAction="#menuPayment" prefHeight="30.0" prefWidth="230.0" styleClass="btn" stylesheets="@main-menu.css" text="Pay" />
+                                    <Button fx:id="menu_remove_btn" layoutX="153.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRemove" prefHeight="30.0" prefWidth="70.0" styleClass="btn" stylesheets="@main-menu.css" text="Remove" />
+                                    <Button fx:id="menu_refresh_btn" layoutX="75.0" layoutY="326.0" mnemonicParsing="false" onAction="#menuRefresh" prefHeight="30.0" prefWidth="70.0" styleClass="btn" stylesheets="@main-menu.css" text="Refresh" />
                                  </children>
                               </AnchorPane>
                            </children>

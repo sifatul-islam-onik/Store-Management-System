@@ -12,9 +12,9 @@
 
 <AnchorPane fx:id="product_card" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.storemanagementsystem.ProductCardController">
    <children>
-      <VBox layoutX="82.0" layoutY="8.0" prefHeight="230.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="82.0" layoutY="8.0" prefHeight="230.0" prefWidth="225.0" styleClass="card" stylesheets="@main-menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="230.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="225.0" styleClass="card" stylesheets="@main-menu.css">
                <children>
                   <Label fx:id="product_card_name" contentDisplay="CENTER" prefHeight="46.0" prefWidth="158.0" text="Product Name">
                      <font>
@@ -34,19 +34,19 @@
                   </Label>
                </children>
             </HBox>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="225.0">
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="209.0" styleClass="card" stylesheets="@main-menu.css">
                <children>
-                  <ImageView fx:id="product_card_image" fitHeight="148.0" fitWidth="225.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="product_card_image" fitHeight="148.0" fitWidth="218.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="250.0">
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="225.0" styleClass="card" stylesheets="@main-menu.css">
                <children>
-                  <Spinner fx:id="product_card_spinner" prefHeight="26.0" prefWidth="73.0">
+                  <Spinner fx:id="product_card_spinner" prefHeight="26.0" prefWidth="96.0">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Spinner>
-                  <Button fx:id="product_card_addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#addBtn" prefHeight="26.0" prefWidth="67.0" text="Add">
+                  <Button fx:id="product_card_addBtn" alignment="CENTER" mnemonicParsing="false" onAction="#addBtn" prefHeight="26.0" prefWidth="102.0" styleClass="btn" stylesheets="@main-menu.css" text="Add">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

@@ -26,7 +26,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.*;
 
 public class MainMenuController implements Initializable {
@@ -193,11 +192,13 @@ public class MainMenuController implements Initializable {
     @FXML
     private Label dashboard_totalIncome;
 
+    @FXML
+    private ComboBox<?> menu_filter_type;
+
     private String cmd;
     private Alert alert;
     private Connection connection = Database.getConnection();
     private PreparedStatement preparedStatement;
-    private Statement statement;
     private ResultSet resultSet;
 
     public void menuRefresh(){
@@ -236,6 +237,7 @@ public class MainMenuController implements Initializable {
             inventory_panel.setVisible(false);
             customer_panel.setVisible(true);
             menu_panel.setVisible(false);
+            displayCustomerData();
         }
     }
 
@@ -270,7 +272,6 @@ public class MainMenuController implements Initializable {
     }
 
     public void displayDashboardTotalIncome(){
-        Date date = new Date();
         double total = 0;
         cmd = "SELECT SUM(total) FROM receipts";
         try{
@@ -287,8 +288,9 @@ public class MainMenuController implements Initializable {
 
     public void displayDashboardTodaysIncome(){
         Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         double total = 0;
-        cmd = "SELECT SUM(total) FROM receipts WHERE date = '" + new java.sql.Date(date.getTime()) + "'";
+        cmd = "SELECT SUM(total) FROM receipts WHERE date = '" + sqlDate + "'";
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -298,7 +300,7 @@ public class MainMenuController implements Initializable {
         } catch(Exception e){
             e.printStackTrace();
         }
-        dashboard_totalIncome.setText(total + " BDT");
+        dashboard_todaysIncome.setText(total + " BDT");
     }
 
     public void displayDashboardIncomeChart(){
@@ -371,9 +373,9 @@ public class MainMenuController implements Initializable {
     }
 
     public ObservableList<ProductData> getOrderData() {
-        customerID();
+        int cID = customerID();
         ObservableList<ProductData> data = FXCollections.observableArrayList();
-        cmd = "SELECT * FROM customers WHERE customer_id = " + Data.cid;
+        cmd = "SELECT * FROM customers WHERE customer_id = " + cID;
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -401,8 +403,8 @@ public class MainMenuController implements Initializable {
 
     double getTotalPrice(){
         double total = 0;
-        customerID();
-        cmd = "SELECT SUM(price) FROM customers WHERE customer_id = " + Data.cid;
+        int cID = customerID();
+        cmd = "SELECT SUM(price) FROM customers WHERE customer_id = " + cID;
         try {
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -440,6 +442,7 @@ public class MainMenuController implements Initializable {
 
     public void menuPayment(){
         double total = getTotalPrice();
+        int cID = customerID();
         double ammount = Double.valueOf(menu_amount.getText().toString());
         if(ammount<total){
             alert = new Alert(Alert.AlertType.ERROR);
@@ -461,7 +464,7 @@ public class MainMenuController implements Initializable {
             cmd = "INSERT INTO receipts (customer_id, total, date, employee_username) VALUES(?,?,?,?)";
             try{
                 preparedStatement = connection.prepareStatement(cmd);
-                preparedStatement.setInt(1, Data.cid);
+                preparedStatement.setInt(1, cID);
                 preparedStatement.setDouble(2, total);
                 Date date = new Date();
                 preparedStatement.setDate(3,new java.sql.Date(date.getTime()));
@@ -490,31 +493,22 @@ public class MainMenuController implements Initializable {
         int ind = menu_table.getSelectionModel().getSelectedIndex();
         if(ind < 0 || product.getId() == 0) return;
 
-        cmd = "SELECT product_id, type, stock, price, image FROM products WHERE name = '" + product.getProductName() + "'";
-        ProductData fetchedProduct = new ProductData();
+        cmd = "SELECT stock FROM products WHERE name = '" + product.getProductName() + "'";
+        int stock = 0;
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                fetchedProduct.setProduct_id(resultSet.getInt("product_id"));
-                fetchedProduct.setType(resultSet.getString("type"));
-                fetchedProduct.setStock(resultSet.getInt("stock"));
-                fetchedProduct.setPrice(resultSet.getDouble("price"));
-                fetchedProduct.setImage(resultSet.getString("image"));
+                stock = resultSet.getInt("stock");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        int updStock = product.getQuantity() + fetchedProduct.getStock();
-        String path = fetchedProduct.getImage();
-        path = path.replace("\\","\\\\");
+        int updStock = product.getQuantity() + stock;
 
-        cmd = "UPDATE products SET name = '" +
-                product.getProductName() + "', type = '" + fetchedProduct.getType() +
-                "', stock = '" + updStock + "', price = '" + fetchedProduct.getPrice() + "', status = '" +
-                "In Stock" + "', image = '" + path + "', date = '" + product.getDate() +
-                "' WHERE product_id = '" + fetchedProduct.getProduct_id() + "'";
+        cmd = "UPDATE products SET stock = '" + updStock + "', status = '" +
+                "In Stock" + "' WHERE name = '" + product.getProductName() + "'";
         try{
             preparedStatement = connection.prepareStatement(cmd);
             preparedStatement.executeUpdate();
@@ -532,9 +526,10 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    public ObservableList<ProductData> getCardData(){
+    public ObservableList<ProductData> getCardData(String category){
         ObservableList<ProductData> list = FXCollections.observableArrayList();
-        cmd = "SELECT * FROM products";
+        if(category.equals("None")) cmd = "SELECT * FROM products";
+        else cmd = "SELECT * FROM products WHERE type = '" + category + "'";
         try{
             preparedStatement = connection.prepareStatement(cmd);
             resultSet = preparedStatement.executeQuery();
@@ -549,7 +544,11 @@ public class MainMenuController implements Initializable {
     }
 
     public void displayCardData(){
-        ObservableList<ProductData> list = getCardData();
+        String category;
+        if(menu_filter_type.getSelectionModel().getSelectedItem() == null) category = "None";
+        else category = menu_filter_type.getSelectionModel().getSelectedItem().toString();
+
+        ObservableList<ProductData> list = getCardData(category);
 
         int row = 0;
         int column = 0;
@@ -620,8 +619,8 @@ public class MainMenuController implements Initializable {
         }
         cmd = "SELECT product_id FROM products WHERE product_id = '" + inventory_productid.getText() + "'";
         try{
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(cmd);
+            preparedStatement = connection.prepareStatement(cmd);
+            resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -805,6 +804,7 @@ public class MainMenuController implements Initializable {
 
     public void setInventoryType(){
         String list[] = {
+                "None",
                 "Sticker & Sticky Notes",
                 "Adhesive, Gum and Glue stick",
                 "Painting, Drawing & Art Supplies",
@@ -818,6 +818,7 @@ public class MainMenuController implements Initializable {
         }
         ObservableList data = FXCollections.observableArrayList(l);
         inventory_type.setItems(data);
+        menu_filter_type.setItems(data);
     }
 
     public void setStatus(){
@@ -835,7 +836,7 @@ public class MainMenuController implements Initializable {
     }
 
 
-    public void customerID(){
+    public int customerID(){
         int cid = 0,cid2 = 0;
         cmd = "SELECT MAX(customer_id) FROM customers";
         try{
@@ -851,10 +852,11 @@ public class MainMenuController implements Initializable {
                 cid2 = resultSet.getInt("MAX(customer_id)");
             }
             if(cid == 0 || cid == cid2) ++cid;
-            Data.cid = cid;
         } catch(Exception e){
             e.printStackTrace();
         }
+        Data.cid = cid;
+        return cid;
     }
 
     @Override

@@ -11,7 +11,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -37,16 +36,13 @@ public class ProductCardController implements Initializable {
 
     private String cmd;
     private ProductData productData;
-    private SpinnerValueFactory<Integer>spin;
-    private int quantity;
     private Connection connection = Database.getConnection();
     private PreparedStatement preparedStatement;
-    private Statement statement;
     private ResultSet resultSet;
     private Alert alert;
 
     public void addBtn(){
-        quantity = product_card_spinner.getValue();
+        int quantity = product_card_spinner.getValue();
         if(quantity == 0) return;
         String check = "";
         cmd = "SELECT stock FROM products WHERE name = '" + product_card_name.getText() + "'";
@@ -84,7 +80,8 @@ public class ProductCardController implements Initializable {
                     preparedStatement.setInt(1,Data.cid);
                     preparedStatement.setString(2,product_card_name.getText());
                     preparedStatement.setInt(3,quantity);
-                    preparedStatement.setDouble(4,Double.valueOf(product_card_price.getText())*quantity);
+                    String s[] = product_card_price.getText().split(" ");
+                    preparedStatement.setDouble(4,Double.valueOf(s[1])*quantity);
                     Date date = new Date();
                     preparedStatement.setDate(5,new java.sql.Date(date.getTime()));
                     preparedStatement.setString(6,Data.username);
@@ -131,14 +128,14 @@ public class ProductCardController implements Initializable {
     }
 
     public void setQuantity(){
-        spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
+        SpinnerValueFactory<Integer>spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
         product_card_spinner.setValueFactory(spin);
     }
 
     public void setProductData(ProductData productData) {
         this.productData = productData;
         product_card_name.setText(productData.getProductName());
-        product_card_price.setText(productData.getPrice().toString());
+        product_card_price.setText("BDT " + productData.getPrice());
         String path = "File:" + productData.getImage();
         product_card_image.setImage(new Image(path,225,148,false,true));
     }

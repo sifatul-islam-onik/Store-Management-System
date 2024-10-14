@@ -108,28 +108,20 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane signup_form;
 
-    private Connection connection;
+    private Connection connection = Database.getConnection();
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
     private String cmd;
-
-    private String[] questions = {"what is your pet name?","what is your favourite color?","what is your favourite food?"};
+    private Alert alert;
 
     public void setQuestions() {
+        String[] questions = {"what is your pet name?","what is your favourite color?","what is your favourite food?"};
         List<String> questionsList = new ArrayList<>();
         questionsList.addAll(Arrays.asList(questions));
         ObservableList list = FXCollections.observableArrayList(questionsList);
         register_question.setItems(list);
-    }
-
-    public void setForgotQuestions(){
-        List<String> questionsList = new ArrayList<>();
-        questionsList.addAll(Arrays.asList(questions));
-        ObservableList list = FXCollections.observableArrayList(questionsList);
         forgot_question.setItems(list);
     }
-
-    private Alert alert;
 
     public void login(){
         if(login_username.getText().isEmpty() || login_password.getText().isEmpty()){
@@ -140,7 +132,6 @@ public class Controller implements Initializable {
             alert.showAndWait();
             return;
         }
-        connection = Database.getConnection();
         cmd = "SELECT username, password FROM employees WHERE username = ? AND password = ?";
 
         try{
@@ -187,8 +178,6 @@ public class Controller implements Initializable {
             alert.showAndWait();
             return;
         }
-
-        connection = Database.getConnection();
 
         try{
             cmd = "SELECT username FROM employees WHERE username = '"+register_username.getText()+"'";
@@ -254,32 +243,29 @@ public class Controller implements Initializable {
     }
 
     public void switchForm(ActionEvent event) {
-        TranslateTransition slide = new TranslateTransition();
         if(event.getSource() == side_create_button) {
             side_alreadyHave_Label.setVisible(true);
             side_login_button.setVisible(true);
             side_create_button.setVisible(false);
             side_dontHave_label.setVisible(false);
-            setQuestions();
-            slide.setNode(sideform);
-            slide.setToX(300);
-            slide.setDuration(Duration.seconds(0.5));
-            slide.play();
+            signup_form.setVisible(true);
+            login_form.setVisible(false);
+            forgot_form1.setVisible(false);
+            forgot_form2.setVisible(false);
         }
         else if(event.getSource() == side_login_button) {
             side_alreadyHave_Label.setVisible(false);
             side_login_button.setVisible(false);
             side_create_button.setVisible(true);
             side_dontHave_label.setVisible(true);
-            slide.setNode(sideform);
-            slide.setToX(0);
-            slide.setDuration(Duration.seconds(0.5));
-            slide.play();
+            signup_form.setVisible(false);
+            login_form.setVisible(true);
+            forgot_form1.setVisible(false);
+            forgot_form2.setVisible(false);
         }
         else if(event.getSource() == forgot_password){
             login_form.setVisible(false);
             forgot_form1.setVisible(true);
-            setForgotQuestions();
         }
         else if(event.getSource() == forgot_back_button){
             login_form.setVisible(true);
@@ -295,7 +281,6 @@ public class Controller implements Initializable {
                 return;
             }
 
-            connection = Database.getConnection();
             cmd = "SELECT username, question, answer FROM employees WHERE username = ? AND question = ? AND answer = ?";
 
             try{
@@ -347,7 +332,7 @@ public class Controller implements Initializable {
                 forgot_new_password2.clear();
                 return;
             }
-            connection = Database.getConnection();
+
             cmd = "Update employees SET password = '" + forgot_new_password.getText() + "' WHERE username = '" + forgot_username.getText() + "'";
             try{
                 preparedStatement = connection.prepareStatement(cmd);
@@ -380,6 +365,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        setQuestions();
     }
 }
