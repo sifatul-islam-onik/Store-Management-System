@@ -13,4 +13,10 @@ module com.example.storemanagementsystem {
 
     opens com.example.storemanagementsystem to javafx.fxml;
     exports com.example.storemanagementsystem;
+    exports com.example.storemanagementsystem.Controllers;
+    opens com.example.storemanagementsystem.Controllers to javafx.fxml;
+    exports com.example.storemanagementsystem.Utilities;
+    opens com.example.storemanagementsystem.Utilities to javafx.fxml;
+    exports com.example.storemanagementsystem.Models;
+    opens com.example.storemanagementsystem.Models to javafx.fxml;
 }
