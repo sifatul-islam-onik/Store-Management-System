@@ -10,21 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Store_Management_System_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Store_Management_System_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/CustomerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Models/CustomerData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Utilities/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Utilities/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/ProductCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/ProductCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/ProductData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Models/ProductData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/StoreManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/StoreManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/login-page.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/css/login-page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/main-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/css/main-menu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/main-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/product-card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/product-card.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/store-management.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/store-management.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Store_Management_System_jar/Store-Management-System.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +104,7 @@
       <workItem from="1728879386706" duration="9184000" />
       <workItem from="1728906437376" duration="1005000" />
       <workItem from="1728907484838" duration="1302000" />
-      <workItem from="1728968040993" duration="5435000" />
+      <workItem from="1728968040993" duration="6493000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Store-Management-System:jar">
+  <artifact type="jar" name="Store-Management-System:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Store_Management_System_jar</output-path>
     <root id="archive" name="Store-Management-System.jar">
       <element id="directory" name="META-INF">
