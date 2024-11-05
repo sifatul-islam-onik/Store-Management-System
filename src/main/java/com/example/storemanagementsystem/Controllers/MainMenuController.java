@@ -5,6 +5,7 @@ import com.example.storemanagementsystem.Models.ProductData;
 import com.example.storemanagementsystem.StoreManagement;
 import com.example.storemanagementsystem.Utilities.Data;
 import com.example.storemanagementsystem.Utilities.Database;
+import com.example.storemanagementsystem.Utilities.InvoiceGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainMenuController implements Initializable {
@@ -472,14 +474,17 @@ public class MainMenuController implements Initializable {
                 preparedStatement.setInt(1, cID);
                 preparedStatement.setDouble(2, total);
                 Date date = new Date();
-                preparedStatement.setDate(3,new java.sql.Date(date.getTime()));
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                preparedStatement.setDate(3,sqlDate);
                 preparedStatement.setString(4, Data.username);
                 preparedStatement.executeUpdate();
+
+                generateInvoice(cID,Data.username,date);
 
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("SUCCESS");
                 alert.setHeaderText(null);
-                alert.setContentText("Payment Successful");
+                alert.setContentText("Payment Successful...Invoice Generated");
                 alert.showAndWait();
 
                 menu_total.setText("0.00 BDT");
@@ -491,6 +496,13 @@ public class MainMenuController implements Initializable {
             }
 
         }
+    }
+
+    public void generateInvoice(int CustomerID,String EmployeeID,Date date){
+        List<ProductData> list = new ArrayList<>(getOrderData());
+        InvoiceGenerator invoiceGenerator = new InvoiceGenerator(list);
+        SimpleDateFormat pattern = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
+        invoiceGenerator.write(CustomerID,EmployeeID,pattern.format(date));
     }
 
     public void menuRemove(){
