@@ -169,7 +169,7 @@ public class InvoiceGenerator {
 
             cs.beginText();
             cs.setFont(PDType1Font.TIMES_ROMAN, 8);
-            cs.newLineAtOffset(450, (560-(20* (list.size()+6))));
+            cs.newLineAtOffset(450, (560-(20* (list.size()+4))));
             cs.showText(EmployeeID);
             cs.endText();
 
