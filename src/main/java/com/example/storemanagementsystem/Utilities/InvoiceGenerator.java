@@ -24,7 +24,7 @@ public class InvoiceGenerator {
         this.list = list;
     }
 
-    public void write(int CustomerID, String EmployeeID, String date){
+    public void write(int CustomerID, String EmployeeID, String date,double amount){
         PDPage mypage = invoice.getPage(0);
         try {
             PDPageContentStream cs = new PDPageContentStream(invoice, mypage);
@@ -138,14 +138,38 @@ public class InvoiceGenerator {
             cs.endText();
 
             cs.beginText();
+            cs.setFont(PDType1Font.TIMES_ROMAN, 14);
+            cs.newLineAtOffset(290, (560-(20* (list.size()+1))));
+            cs.showText("Cash payed: ");
+            cs.endText();
+
+            cs.beginText();
+            cs.setFont(PDType1Font.TIMES_ROMAN, 14);
+            cs.newLineAtOffset(390, (560-(20* (list.size()+1))));
+            cs.showText(amount + " BDT");
+            cs.endText();
+
+            cs.beginText();
+            cs.setFont(PDType1Font.TIMES_ROMAN, 14);
+            cs.newLineAtOffset(290, (560-(20* (list.size()+2))));
+            cs.showText("Change : ");
+            cs.endText();
+
+            cs.beginText();
+            cs.setFont(PDType1Font.TIMES_ROMAN, 14);
+            cs.newLineAtOffset(390, (560-(20* (list.size()+2))));
+            cs.showText(amount - total + " BDT");
+            cs.endText();
+
+            cs.beginText();
             cs.setFont(PDType1Font.TIMES_ROMAN, 8);
-            cs.newLineAtOffset(400, (560-(20* (list.size()+2))));
+            cs.newLineAtOffset(400, (560-(20* (list.size()+4))));
             cs.showText("Serviced by: ");
             cs.endText();
 
             cs.beginText();
             cs.setFont(PDType1Font.TIMES_ROMAN, 8);
-            cs.newLineAtOffset(450, (560-(20* (list.size()+2))));
+            cs.newLineAtOffset(450, (560-(20* (list.size()+6))));
             cs.showText(EmployeeID);
             cs.endText();
 

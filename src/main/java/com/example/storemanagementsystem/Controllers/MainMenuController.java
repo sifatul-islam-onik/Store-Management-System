@@ -35,6 +35,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class MainMenuController implements Initializable {
 
     @FXML
@@ -479,7 +481,7 @@ public class MainMenuController implements Initializable {
                 preparedStatement.setString(4, Data.username);
                 preparedStatement.executeUpdate();
 
-                generateInvoice(cID,Data.username,date);
+                generateInvoice(cID,Data.username,date,ammount);
 
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("SUCCESS");
@@ -498,11 +500,12 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    public void generateInvoice(int CustomerID,String EmployeeID,Date date){
-        List<ProductData> list = new ArrayList<>(getOrderData());
+    public void generateInvoice(int CustomerID,String EmployeeID,Date date,double amount){
+        ObservableList<ProductData> data = getOrderData();
+        List<ProductData> list = new ArrayList<>(data);
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator(list);
         SimpleDateFormat pattern = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
-        invoiceGenerator.write(CustomerID,EmployeeID,pattern.format(date));
+        invoiceGenerator.write(CustomerID,EmployeeID,pattern.format(date),amount);
     }
 
     public void menuRemove(){
@@ -868,7 +871,8 @@ public class MainMenuController implements Initializable {
             if(resultSet.next()){
                 cid2 = resultSet.getInt("MAX(customer_id)");
             }
-            if(cid == 0 || cid == cid2) ++cid;
+            cid = max(cid,cid2);
+            if(cid == 0) ++cid;
         } catch(Exception e){
             e.printStackTrace();
         }
