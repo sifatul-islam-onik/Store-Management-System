@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="invoice generator added, menu not refreshing when payment is complete">
+    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="invoice bug fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Utilities/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Utilities/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Utilities/InvoiceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Utilities/InvoiceGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +35,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sifatul-islam-onik"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sifatul-islam-onik/Store-Management-System.git",
+    "accountId": "5f732ed1-29ae-4919-add1-76778181507b"
+  }
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -58,7 +68,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
-    "Application.StoreManagement.executor": "Debug",
+    "Application.StoreManagement.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Dev",
@@ -110,8 +120,17 @@
       <workItem from="1728906437376" duration="1005000" />
       <workItem from="1728907484838" duration="1302000" />
       <workItem from="1728968040993" duration="6493000" />
-      <workItem from="1731167839922" duration="3175000" />
+      <workItem from="1731167839922" duration="5838000" />
     </task>
+    <task id="LOCAL-00001" summary="invoice bug fixed">
+      <option name="closed" value="true" />
+      <created>1731177993210</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731177993210</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,15 +147,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainMenuController.java</url>
-          <line>501</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="invoice bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="invoice bug fixed" />
   </component>
 </project>

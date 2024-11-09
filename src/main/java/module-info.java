@@ -11,6 +11,7 @@ module com.example.storemanagementsystem {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires org.apache.pdfbox;
+    requires java.desktop;
 
     opens com.example.storemanagementsystem to javafx.fxml;
     exports com.example.storemanagementsystem;

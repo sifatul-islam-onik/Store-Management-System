@@ -6,6 +6,8 @@ import com.example.storemanagementsystem.StoreManagement;
 import com.example.storemanagementsystem.Utilities.Data;
 import com.example.storemanagementsystem.Utilities.Database;
 import com.example.storemanagementsystem.Utilities.InvoiceGenerator;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +21,10 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,14 +32,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.application.HostServices;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 import static java.lang.Math.max;
 
@@ -211,6 +221,7 @@ public class MainMenuController implements Initializable {
     private ResultSet resultSet;
 
     public void menuRefresh(){
+        customerID();
         displayInventory();
         displayCardData();
         displayOrderData();
@@ -382,7 +393,7 @@ public class MainMenuController implements Initializable {
     }
 
     public ObservableList<ProductData> getOrderData() {
-        int cID = customerID();
+        int cID = Data.cid;
         ObservableList<ProductData> data = FXCollections.observableArrayList();
         cmd = "SELECT * FROM customers WHERE customer_id = " + cID;
         try{
@@ -412,7 +423,7 @@ public class MainMenuController implements Initializable {
 
     double getTotalPrice(){
         double total = 0;
-        int cID = customerID();
+        int cID = Data.cid;
         cmd = "SELECT SUM(price) FROM customers WHERE customer_id = " + cID;
         try {
             preparedStatement = connection.prepareStatement(cmd);
@@ -451,7 +462,7 @@ public class MainMenuController implements Initializable {
 
     public void menuPayment(){
         double total = getTotalPrice();
-        int cID = customerID();
+        int cID = Data.cid;
         double ammount = Double.valueOf(menu_amount.getText().toString());
         if(ammount<total){
             alert = new Alert(Alert.AlertType.ERROR);
@@ -489,6 +500,9 @@ public class MainMenuController implements Initializable {
                 alert.setContentText("Payment Successful...Invoice Generated");
                 alert.showAndWait();
 
+                File file = new File(cID + ".pdf");
+                openFile(file);
+
                 menu_total.setText("0.00 BDT");
                 menu_change.setText("0.00 BDT");
                 menu_amount.clear();
@@ -497,6 +511,18 @@ public class MainMenuController implements Initializable {
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    public static void openFile(File file) throws Exception {
+        if (Desktop.isDesktopSupported()) {
+            new Thread(() -> {
+                try {
+                    Desktop.getDesktop().open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
     }
 
@@ -856,7 +882,7 @@ public class MainMenuController implements Initializable {
     }
 
 
-    public int customerID(){
+    public void customerID(){
         int cid = 0,cid2 = 0;
         cmd = "SELECT MAX(customer_id) FROM customers";
         try{
@@ -871,13 +897,11 @@ public class MainMenuController implements Initializable {
             if(resultSet.next()){
                 cid2 = resultSet.getInt("MAX(customer_id)");
             }
-            cid = max(cid,cid2);
-            if(cid == 0) ++cid;
+            if(cid == 0 || cid2 == cid) ++cid;
         } catch(Exception e){
             e.printStackTrace();
         }
         Data.cid = cid;
-        return cid;
     }
 
     @Override
