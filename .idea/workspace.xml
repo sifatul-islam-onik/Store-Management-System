@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="invoice bug fixed">
+    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="json parsing added to fetch conversion rates in realtime">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/storemanagementsystem/Controllers/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +139,7 @@
       <workItem from="1733231387964" duration="167000" />
       <workItem from="1733231604918" duration="1817000" />
       <workItem from="1733315293469" duration="5090000" />
-      <workItem from="1733327458531" duration="6567000" />
+      <workItem from="1733327458531" duration="7225000" />
     </task>
     <task id="LOCAL-00001" summary="invoice bug fixed">
       <option name="closed" value="true" />
@@ -160,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731181293352</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="json parsing added to fetch conversion rates in realtime">
+      <option name="closed" value="true" />
+      <created>1733334325812</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733334325812</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +184,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="invoice bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="invoice bug fixed" />
+    <MESSAGE value="json parsing added to fetch conversion rates in realtime" />
+    <option name="LAST_COMMIT_MESSAGE" value="json parsing added to fetch conversion rates in realtime" />
   </component>
 </project>

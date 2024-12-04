@@ -12,6 +12,7 @@ The final project for course CSE 2200 of 2nd Year 2nd Semester.
 - Authentication for admin
 - Add, Update, Delete from Inventory
 - Report for Sales and Incomes
+- Currency exchange rates parsed in realtime
 
 
 ## Run Locally
@@ -49,3 +50,7 @@ The final project for course CSE 2200 of 2nd Year 2nd Semester.
 ### Customers Panel
 
 ![](https://github.com/sifatul-islam-onik/Store-Management-System/blob/main/screenshots/menu_customers.png)
+
+### Conversion Rates Panel
+
+![](https://github.com/sifatul-islam-onik/Store-Management-System/blob/main/screenshots/menu_conversion_rate.png)
