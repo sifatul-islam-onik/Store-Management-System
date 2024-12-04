@@ -3,11 +3,12 @@ package com.example.storemanagementsystem.Controllers;
 import com.example.storemanagementsystem.Models.CustomerData;
 import com.example.storemanagementsystem.Models.ProductData;
 import com.example.storemanagementsystem.StoreManagement;
+import com.example.storemanagementsystem.Utilities.ConversionRate;
 import com.example.storemanagementsystem.Utilities.Data;
 import com.example.storemanagementsystem.Utilities.Database;
 import com.example.storemanagementsystem.Utilities.InvoiceGenerator;
-import javafx.application.Application;
-import javafx.application.HostServices;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.application.HostServices;
+import javafx.util.Callback;
 
 import java.awt.*;
 import java.io.File;
@@ -48,6 +49,24 @@ import java.util.List;
 import static java.lang.Math.max;
 
 public class MainMenuController implements Initializable {
+
+    @FXML
+    private Button conversion_rates_btn;
+
+    @FXML
+    private AnchorPane conversion_rates_panel;
+
+    @FXML
+    private ComboBox<?> currency_base;
+
+    @FXML
+    private TableView<Map.Entry<String, String>> currency_table;
+
+    @FXML
+    private TableColumn<?, ?> currency_table_col_cur;
+
+    @FXML
+    private TableColumn<?, ?> currency_table_col_rate;
 
     @FXML
     private TableColumn<?, ?> customer_col_cashier;
@@ -214,6 +233,12 @@ public class MainMenuController implements Initializable {
     @FXML
     private ComboBox<?> menu_filter_type;
 
+    @FXML
+    private Label next_update_time;
+
+    @FXML
+    private Label last_update_time;
+
     private String cmd;
     private Alert alert;
     private Connection connection = Database.getConnection();
@@ -228,6 +253,7 @@ public class MainMenuController implements Initializable {
         displayTotalPrice();
         displayCustomerData();
         displayDashBoard();
+        displayConversionRates();
     }
 
     public void switchForm(ActionEvent event) {
@@ -236,6 +262,7 @@ public class MainMenuController implements Initializable {
             inventory_panel.setVisible(false);
             customer_panel.setVisible(false);
             menu_panel.setVisible(false);
+            conversion_rates_panel.setVisible(false);
             displayDashBoard();
         }
         else if(event.getSource() == inventory_btn) {
@@ -243,6 +270,7 @@ public class MainMenuController implements Initializable {
             inventory_panel.setVisible(true);
             customer_panel.setVisible(false);
             menu_panel.setVisible(false);
+            conversion_rates_panel.setVisible(false);
             displayInventory();
         }
         else if(event.getSource() == menu_btn) {
@@ -250,6 +278,7 @@ public class MainMenuController implements Initializable {
             inventory_panel.setVisible(false);
             customer_panel.setVisible(false);
             menu_panel.setVisible(true);
+            conversion_rates_panel.setVisible(false);
             menuRefresh();
         }
         else if(event.getSource() == customers_btn) {
@@ -257,8 +286,58 @@ public class MainMenuController implements Initializable {
             inventory_panel.setVisible(false);
             customer_panel.setVisible(true);
             menu_panel.setVisible(false);
+            conversion_rates_panel.setVisible(false);
             displayCustomerData();
         }
+        else if(event.getSource() == conversion_rates_btn){
+            dashboard_panel.setVisible(false);
+            inventory_panel.setVisible(false);
+            customer_panel.setVisible(false);
+            menu_panel.setVisible(false);
+            conversion_rates_panel.setVisible(true);
+            displayConversionRates();
+        }
+    }
+
+    public void setCurrencyType(){
+        ConversionRate conversionRate = new ConversionRate("USD");
+        List<String>l = new ArrayList<>();
+        l.addAll(conversionRate.getRates().keySet());
+        Collections.sort(l);
+        l.add(0,"USD");
+        ObservableList data = FXCollections.observableArrayList(l);
+        currency_base.setItems(data);
+        currency_base.getSelectionModel().selectFirst();
+    }
+
+    public void displayConversionRates(){
+        String currency = currency_base.getSelectionModel().getSelectedItem().toString();
+
+        ConversionRate conversionRate = new ConversionRate(currency);
+
+        last_update_time.setText(conversionRate.getLastUpdateUtc());
+        next_update_time.setText(conversionRate.getNextUpdateUtc());
+
+        TableColumn<Map.Entry<String,String>,String> col1 = new TableColumn<>("Currency");
+        TableColumn<Map.Entry<String,String>,String> col2 = new TableColumn<>("Rate");
+
+        col1.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Map.Entry<String, String>, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<String, String>, String> entryStringCellDataFeatures) {
+                return new SimpleStringProperty(entryStringCellDataFeatures.getValue().getKey());
+            }
+        });
+
+        col2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Map.Entry<String, String>, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<String, String>, String> entryStringCellDataFeatures) {
+                return new SimpleStringProperty(entryStringCellDataFeatures.getValue().getValue());
+            }
+        });
+
+        ObservableList<Map.Entry<String,String>> items = FXCollections.observableArrayList(conversionRate.getRates().entrySet());
+        currency_table.setItems(items);
+        currency_table.getColumns().setAll(col1,col2);
     }
 
     public void displayDashboardNoOfCustomer(){
@@ -909,6 +988,7 @@ public class MainMenuController implements Initializable {
         displayUsername();
         setInventoryType();
         setStatus();
+        setCurrencyType();
         menuRefresh();
     }
 }
