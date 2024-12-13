@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2024 at 10:14 AM
+-- Generation Time: Dec 13, 2024 at 06:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -78,7 +78,7 @@ CREATE TABLE `products` (
 
 CREATE TABLE `receipts` (
   `id` int(11) NOT NULL,
-  `customer_id` varchar(100) NOT NULL,
+  `customer_id` int(100) NOT NULL,
   `total` double NOT NULL,
   `date` date NOT NULL,
   `employee_username` varchar(100) NOT NULL
