@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="readme updated">
+    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="added background image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/css/main-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/css/main-menu.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/store-management.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/store-management.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +148,7 @@
       <workItem from="1733671287181" duration="622000" />
       <workItem from="1733744890967" duration="484000" />
       <workItem from="1733752936596" duration="1198000" />
-      <workItem from="1734079908275" duration="1682000" />
+      <workItem from="1734079908275" duration="5153000" />
     </task>
     <task id="LOCAL-00001" summary="invoice bug fixed">
       <option name="closed" value="true" />
@@ -184,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733334787615</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added background image">
+      <option name="closed" value="true" />
+      <created>1734081762420</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1734081762420</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +211,7 @@
     <MESSAGE value="invoice bug fixed" />
     <MESSAGE value="json parsing added to fetch conversion rates in realtime" />
     <MESSAGE value="readme updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme updated" />
+    <MESSAGE value="added background image" />
+    <option name="LAST_COMMIT_MESSAGE" value="added background image" />
   </component>
 </project>
