@@ -4,9 +4,8 @@
 
 .head-label{
     -fx-text-fill: black;
-    -fx-border-width: 0 0 0 3px;
-    -fx-border-color: black;
     -fx-padding: 5px;
+    -fx-font-size: 25px;
 }
 
 .login-button{
@@ -14,7 +13,7 @@
     -fx-background-radius: 4px;
     -fx-cursor: hand;
     -fx-text-fill: #fff;
-    -fx-font-size: 14px;
+    -fx-font-size: 18px;
 }
 
 .login-button:hover{

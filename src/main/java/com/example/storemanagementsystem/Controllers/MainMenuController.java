@@ -20,7 +20,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,8 +45,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
-import static java.lang.Math.max;
-
 public class MainMenuController implements Initializable {
 
     @FXML
@@ -61,12 +58,6 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private TableView<Map.Entry<String, String>> currency_table;
-
-    @FXML
-    private TableColumn<?, ?> currency_table_col_cur;
-
-    @FXML
-    private TableColumn<?, ?> currency_table_col_rate;
 
     @FXML
     private TableColumn<?, ?> customer_col_cashier;
@@ -93,13 +84,7 @@ public class MainMenuController implements Initializable {
     private Button dashboard_btn;
 
     @FXML
-    private Button inventory_add_btn;
-
-    @FXML
     private Button inventory_btn;
-
-    @FXML
-    private Button inventory_clear_btn;
 
     @FXML
     private TableColumn<?, ?> inventory_col__date;
@@ -123,13 +108,7 @@ public class MainMenuController implements Initializable {
     private TableColumn<?, ?> inventory_col_type;
 
     @FXML
-    private Button inventory_delete_btn;
-
-    @FXML
     private ImageView inventory_image;
-
-    @FXML
-    private Button inventory_import_button;
 
     @FXML
     private AnchorPane inventory_panel;
@@ -154,9 +133,6 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private ComboBox<?> inventory_type;
-
-    @FXML
-    private Button inventory_update_btn;
 
     @FXML
     private Button logout_btn;
@@ -192,15 +168,6 @@ public class MainMenuController implements Initializable {
     private AnchorPane menu_panel;
 
     @FXML
-    private Button menu_pay_btn;
-
-    @FXML
-    private Button menu_remove_btn;
-
-    @FXML
-    private ScrollPane menu_scroll;
-
-    @FXML
     private TableView<ProductData> menu_table;
 
     @FXML
@@ -208,15 +175,6 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private AnchorPane dashboard_panel;
-
-    @FXML
-    private Button menu_refresh_btn;
-
-    @FXML
-    private BarChart<?, ?> dashboard_customerChart;
-
-    @FXML
-    private AreaChart<?, ?> dashboard_incomeChart;
 
     @FXML
     private Label dashboard_numberofCustomer;
@@ -402,45 +360,11 @@ public class MainMenuController implements Initializable {
         dashboard_todaysIncome.setText(total + " BDT");
     }
 
-    public void displayDashboardIncomeChart(){
-        dashboard_incomeChart.getData().clear();
-        cmd = "SELECT date, SUM(total) FROM receipts GROUP BY date order by TIMESTAMP(date)";
-        XYChart.Series chart = new XYChart.Series();
-        try{
-            preparedStatement = connection.prepareStatement(cmd);
-            resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                chart.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getDouble(2)));
-            }
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        dashboard_incomeChart.getData().add(chart);
-    }
-
-    public void displayDashboardCustomerChart(){
-        dashboard_customerChart.getData().clear();
-        cmd = "SELECT date, COUNT(id) FROM receipts GROUP BY date order by TIMESTAMP(date)";
-        XYChart.Series chart = new XYChart.Series();
-        try{
-            preparedStatement = connection.prepareStatement(cmd);
-            resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                chart.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getInt(2)));
-            }
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        dashboard_customerChart.getData().add(chart);
-    }
-
     public void displayDashBoard(){
         displayDashboardNoOfCustomer();
         displayDashboardSoldProduct();
         displayDashboardTotalIncome();
         displayDashboardTodaysIncome();
-        displayDashboardIncomeChart();
-        displayDashboardCustomerChart();
     }
 
     public ObservableList<CustomerData> getCustomerData(){
@@ -977,10 +901,10 @@ public class MainMenuController implements Initializable {
                 cid2 = resultSet.getInt("MAX(customer_id)");
             }
             if(cid == 0 || cid2 == cid) ++cid;
-        } catch(Exception e){
+            Data.cid = cid;
+        } catch(Exception e) {
             e.printStackTrace();
         }
-        Data.cid = cid;
     }
 
     @Override

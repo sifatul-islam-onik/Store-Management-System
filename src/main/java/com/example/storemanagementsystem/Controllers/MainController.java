@@ -75,9 +75,6 @@ public class MainController implements Initializable {
     private TextField register_answer;
 
     @FXML
-    private Button register_button;
-
-    @FXML
     private PasswordField register_password;
 
     @FXML
@@ -100,9 +97,6 @@ public class MainController implements Initializable {
 
     @FXML
     private Button side_login_button;
-
-    @FXML
-    private AnchorPane sideform;
 
     @FXML
     private AnchorPane signup_form;
