@@ -9,9 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="json parsing added to fetch conversion rates in realtime">
+    <list default="true" id="c48ba3bb-2bd8-4d64-ad4f-27bb5cdac334" name="Changes" comment="readme updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/css/main-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/css/main-menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/main-menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/store-management.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/storemanagementsystem/fxml/store-management.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="Class" />
         <option value="FxmlFile" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -68,31 +70,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Run.executor&quot;: &quot;Run&quot;,
-    &quot;Application.StoreManagement.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/javafx-sdk-22.0.2/bin/vcruntime140_1.dll&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Run.executor": "Run",
+    "Application.StoreManagement.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/CSE/CODES/github/Store-Management-System/src/main/resources/com/example/storemanagementsystem/image",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\CSE\CODES\github\Store-Management-System\src\main\resources\com\example\storemanagementsystem\image" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\CSE\CODES\github\Store-Management-System\src\main\resources\com\example\storemanagementsystem\fxml" />
       <recent name="E:\CSE\CODES\github\Store-Management-System\src\main\resources\com\example\storemanagementsystem\css" />
@@ -139,7 +144,13 @@
       <workItem from="1733231387964" duration="167000" />
       <workItem from="1733231604918" duration="1817000" />
       <workItem from="1733315293469" duration="5090000" />
-      <workItem from="1733327458531" duration="7225000" />
+      <workItem from="1733327458531" duration="7297000" />
+      <workItem from="1733419766130" duration="55000" />
+      <workItem from="1733597441326" duration="122000" />
+      <workItem from="1733671287181" duration="622000" />
+      <workItem from="1733744890967" duration="484000" />
+      <workItem from="1733752936596" duration="1198000" />
+      <workItem from="1734079908275" duration="1682000" />
     </task>
     <task id="LOCAL-00001" summary="invoice bug fixed">
       <option name="closed" value="true" />
@@ -165,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733334325812</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="readme updated">
+      <option name="closed" value="true" />
+      <created>1733334787615</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733334787615</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +204,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="invoice bug fixed" />
     <MESSAGE value="json parsing added to fetch conversion rates in realtime" />
-    <option name="LAST_COMMIT_MESSAGE" value="json parsing added to fetch conversion rates in realtime" />
+    <MESSAGE value="readme updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme updated" />
   </component>
 </project>

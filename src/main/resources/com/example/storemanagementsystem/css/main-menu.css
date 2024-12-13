@@ -76,3 +76,8 @@
     -fx-border-color: #000;
     -fx-border-width: 1px;
 }
+
+.root{
+    -fx-background-image: url('../image/background.jpg');
+    -fx-background-size:cover;
+}
