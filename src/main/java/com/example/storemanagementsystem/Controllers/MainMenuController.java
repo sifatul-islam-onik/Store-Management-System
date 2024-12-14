@@ -10,6 +10,7 @@ import com.example.storemanagementsystem.Utilities.InvoiceGenerator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -196,6 +197,11 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private Label last_update_time;
+    @FXML
+    private TextField currency_input;
+
+    @FXML
+    private Label currency_output;
 
     private String cmd;
     private Alert alert;
@@ -905,6 +911,22 @@ public class MainMenuController implements Initializable {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void calculateCurrency(){
+        if(currency_table.getSelectionModel().getSelectedItem() == null){
+            return;
+        }
+        int in = Integer.parseInt(currency_input.getText());
+        double result = 0.0;
+        String currency = currency_table.getSelectionModel().getSelectedItem().getKey();
+        double rate = Double.parseDouble(currency_table.getSelectionModel().getSelectedItem().getValue());
+        int index = currency_table.getSelectionModel().getSelectedIndex();
+        if(index<0) return;
+
+        result = in * rate;
+        String out = currency_base.getSelectionModel().getSelectedItem().toString() + " = " + String.format("%.2f",result) + " " + currency;
+        currency_output.setText(out);
     }
 
     @Override

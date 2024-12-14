@@ -336,6 +336,8 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
+                              <TextField fx:id="currency_input" layoutX="588.0" layoutY="122.0" onAction="#calculateCurrency" prefHeight="30.0" prefWidth="87.0" promptText="base currency" />
+                              <Label fx:id="currency_output" layoutX="683.0" layoutY="116.0" prefHeight="42.0" prefWidth="121.0" text="select a currency from table to convert" wrapText="true" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="customer_panel" layoutX="346.0" layoutY="200.0" prefHeight="600.0" prefWidth="857.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
